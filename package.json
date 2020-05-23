@@ -1,10 +1,48 @@
 {
-  "name": "react-native-material-dropdown",
-  "version": "0.11.1",
-  "license": "BSD-3-Clause",
-  "author": "Alexander Nazarov <n4kz@n4kz.com>",
-
+  "_from": "git+https://github.com/SaaS-development/react-native-material-dropdown.git",
+  "_id": "react-native-material-dropdown@0.11.1",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/react-native-material-dropdown",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "react-native-material-dropdown@git+https://github.com/SaaS-development/react-native-material-dropdown.git",
+    "name": "react-native-material-dropdown",
+    "escapedName": "react-native-material-dropdown",
+    "rawSpec": "git+https://github.com/SaaS-development/react-native-material-dropdown.git",
+    "saveSpec": "git+https://github.com/SaaS-development/react-native-material-dropdown.git",
+    "fetchSpec": "https://github.com/SaaS-development/react-native-material-dropdown.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+https://github.com/SaaS-development/react-native-material-dropdown.git#833f5c375aa0601919806d6e27b5df1ab27e7ef6",
+  "_spec": "react-native-material-dropdown@git+https://github.com/SaaS-development/react-native-material-dropdown.git",
+  "_where": "/Users/man/Desktop/circles",
+  "author": {
+    "name": "Alexander Nazarov",
+    "email": "n4kz@n4kz.com"
+  },
+  "bugs": {
+    "url": "https://github.com/n4kz/react-native-material-dropdown/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "prop-types": "^15.5.9",
+    "react-native-material-buttons": "https://github.com/SaaS-development/react-native-material-buttons.git",
+    "react-native-material-ripple": "^0.8.0",
+    "react-native-material-textfield": "https://github.com/SaaS-development/react-native-material-textfield.git"
+  },
+  "deprecated": false,
   "description": "Material dropdown",
+  "devDependencies": {
+    "babel-eslint": "^8.0.0",
+    "eslint": "^4.5.0",
+    "eslint-plugin-react": "^7.0.0"
+  },
+  "homepage": "https://github.com/n4kz/react-native-material-dropdown#readme",
   "keywords": [
     "react",
     "react-component",
@@ -16,33 +54,19 @@
     "spinner",
     "select"
   ],
-
+  "license": "BSD-3-Clause",
   "main": "index.js",
-
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/n4kz/react-native-material-dropdown.git"
-  },
-
+  "name": "react-native-material-dropdown",
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
   },
-
-  "devDependencies": {
-    "babel-eslint": "^8.0.0",
-    "eslint": "^4.5.0",
-    "eslint-plugin-react": "^7.0.0"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/n4kz/react-native-material-dropdown.git"
   },
-
   "scripts": {
     "lint": "eslint src example/app.js"
   },
-
-  "dependencies": {
-    "prop-types": "^15.5.9",
-    "react-native-material-buttons": "^0.5.0",
-    "react-native-material-ripple": "^0.8.0",
-    "react-native-material-textfield": "^0.12.0"
-  }
+  "version": "0.11.1"
 }
