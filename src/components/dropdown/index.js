@@ -6,17 +6,20 @@ import {
   FlatList,
   Animated,
   Modal,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
   Dimensions,
   Platform,
   ViewPropTypes,
   I18nManager,
+  Image
 } from 'react-native';
 import Ripple from 'react-native-material-ripple';
 import { TextField } from 'react-native-material-textfield';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 import DropdownItem from '../item';
 import styles from './styles';
+import Entypo from 'react-native-vector-icons/Entypo'
 
 export default class Dropdown extends PureComponent {
   static defaultProps = {
@@ -28,6 +31,7 @@ export default class Dropdown extends PureComponent {
 
     valueExtractor: ({ value } = {}, index) => value,
     labelExtractor: ({ label } = {}, index) => label,
+    imageExtractor: ({ image } = {}, index) => image,
     propsExtractor: () => null,
 
     absoluteRTLLayout: false,
@@ -55,8 +59,8 @@ export default class Dropdown extends PureComponent {
     rippleOpacity: 0.54,
     shadeOpacity: 0.12,
 
-    rippleDuration: 400,
-    animationDuration: 225,
+    rippleDuration: 0,
+    animationDuration: 0,
 
     fontSize: 16,
 
@@ -79,7 +83,7 @@ export default class Dropdown extends PureComponent {
   };
 
   static propTypes = {
-    ...TouchableWithoutFeedback.propTypes,
+    ...TouchableOpacity.propTypes,
 
     disabled: PropTypes.bool,
 
@@ -499,21 +503,25 @@ export default class Dropdown extends PureComponent {
       return renderBase({ ...props, title, value, renderAccessory });
     }
 
-    title = null == title || 'string' === typeof title?
-      title:
+    title = null == title || 'string' === typeof title ?
+      title :
       String(title);
 
     return (
-      <TextField
-        label=''
-        labelHeight={dropdownOffset.top - Platform.select({ ios: 1, android: 2 })}
+      // <TextField
+      //   label=''
+      //   labelHeight={dropdownOffset.top - Platform.select({ ios: 1, android: 2 })}
 
-        {...props}
+      //   {...props}
 
-        value={title}
-        editable={false}
-        onChangeText={undefined}
-        renderAccessory={renderAccessory}
+      //   value={title}
+      //   editable={false}
+      //   onChangeText={undefined}
+      //   renderAccessory={renderAccessory}
+      // />
+      <Text
+        children={title}
+        style={this.props.textInputTextStyle}
       />
     );
   }
@@ -605,16 +613,16 @@ export default class Dropdown extends PureComponent {
     let value = valueExtractor(item, index);
     let label = labelExtractor(item, index);
 
-    let title = null == label?
-      value:
+    let title = null == label ?
+      value :
       label;
 
-    let color = disabled?
-      disabledItemColor:
-      ~selected?
-        index === selected?
-          selectedItemColor:
-          itemColor:
+    let color = disabled ?
+      disabledItemColor :
+      ~selected ?
+        index === selected ?
+          selectedItemColor :
+          itemColor :
         selectedItemColor;
 
     let textStyle = { color, fontSize };
@@ -628,8 +636,10 @@ export default class Dropdown extends PureComponent {
       },
     ];
 
+    let image = this.props.imageExtractor(item, index);
+
     return (
-      <DropdownItem index={index} {...props}>
+      <DropdownItem index={index} {...props} image={image}>
         <Text style={[styles.item, itemTextStyle, textStyle]} numberOfLines={1}>
           {title}
         </Text>
@@ -682,7 +692,7 @@ export default class Dropdown extends PureComponent {
     if (null == dropdownPosition) {
       switch (selected) {
         case -1:
-          translateY -= 1 === itemCount? 0 : itemSize;
+          translateY -= 1 === itemCount ? 0 : itemSize;
           break;
 
         case 0:
@@ -724,14 +734,25 @@ export default class Dropdown extends PureComponent {
       accessibilityLabel,
     };
 
+    //my Code to extract the image
+    let index = this.selectedIndex();
+    let image;
+
+    if (~index) {
+      image = this.props.imageExtractor(data[index], index);
+    }
+
     return (
       <View onLayout={this.onLayout} ref={this.updateContainerRef} style={containerStyle}>
-        <TouchableWithoutFeedback {...touchableProps}>
-          <View pointerEvents='box-only'>
+        
+        <TouchableOpacity {...touchableProps}>
+          <View pointerEvents='box-only' style={[{ flexDirection: 'row', height: '100%', justifyContent: 'space-around', alignItems: 'center' }, this.props.subContainerStyle]}>
+            {image && <Image source={image} style={{ width: '30%', height: '70%', resizeMode: 'contain' }} />}
             {this.renderBase(props)}
+            <Entypo name="triangle-down" size={this.props.triangleSize || RFValue(20)} color={this.props.triangleColor || "#fff"} style={this.props.triangleStyle} />
             {this.renderRipple()}
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
 
         <Modal
           visible={modal}

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { Button } from 'react-native-material-buttons';
+import { TouchableOpacity, Image } from 'react-native';
 
 import styles from './styles';
 
@@ -13,7 +13,7 @@ export default class DropdownItem extends PureComponent {
   };
 
   static propTypes = {
-    ...Button.propTypes,
+    ...TouchableOpacity.propTypes,
 
     index: PropTypes.number.isRequired,
   };
@@ -36,14 +36,15 @@ export default class DropdownItem extends PureComponent {
     let { children, style, index, ...props } = this.props;
 
     return (
-      <Button
+      <TouchableOpacity
         {...props}
 
-        style={[styles.container, style]}
+        style={[styles.container, style, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}
         onPress={this.onPress}
       >
+        <Image source={this.props.image} style={{ height: '100%', width:'10%', alignSelf:'flex-start', resizeMode: 'contain' }} />
         {children}
-      </Button>
+      </TouchableOpacity>
     );
   }
 }

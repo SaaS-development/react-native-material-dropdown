@@ -5,5 +5,6 @@ export default StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 0,
     justifyContent: 'center',
+    backgroundColor:'#fff'
   },
 });
