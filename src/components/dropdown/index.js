@@ -20,6 +20,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import DropdownItem from '../item';
 import styles from './styles';
 import Entypo from 'react-native-vector-icons/Entypo'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 export default class Dropdown extends PureComponent {
   static defaultProps = {
@@ -744,12 +745,14 @@ export default class Dropdown extends PureComponent {
 
     return (
       <View onLayout={this.onLayout} ref={this.updateContainerRef} style={containerStyle}>
-        
+
         <TouchableOpacity {...touchableProps}>
           <View pointerEvents='box-only' style={[{ flexDirection: 'row', height: '100%', justifyContent: 'space-around', alignItems: 'center' }, this.props.subContainerStyle]}>
             {image && <Image source={image} style={{ width: '30%', height: '70%', resizeMode: 'contain' }} />}
             {this.renderBase(props)}
-            <Entypo name="triangle-down" size={this.props.triangleSize || RFValue(20)} color={this.props.triangleColor || "#fff"} style={this.props.triangleStyle} />
+            {!!this.props.triangleComponent ?
+              this.props.triangleComponent()
+              : <Entypo name="triangle-down" size={this.props.triangleSize || RFValue(20)} color={this.props.triangleColor || "#fff"} style={this.props.triangleStyle} />}
             {this.renderRipple()}
           </View>
         </TouchableOpacity>
